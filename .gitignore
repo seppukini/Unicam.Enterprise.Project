@@ -12,3 +12,6 @@ Unicam.Paradigmi.Project.Model/bin/*
 .idea/*
 
 .DS_Store
+
+Unicam.Paradigmi.Project.Web/.DS_Store
+Unicam.Paradigmi.Project.Model/.DS_Store
