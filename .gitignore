@@ -10,3 +10,5 @@ Unicam.Paradigmi.Project.Model/bin/*
 
 .idea
 .idea/*
+
+.DS_Store
