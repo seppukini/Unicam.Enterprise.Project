@@ -1,19 +1,19 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+<Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
         <TargetFramework>net6.0</TargetFramework>
-        <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
-        <RootNamespace>Unicam.Paradigmi.Project</RootNamespace>
+        <Nullable>enable</Nullable>
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0"/>
+      <Folder Include="Models\Requests\" />
+      <Folder Include="Models\Responses\" />
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Unicam.Paradigmi.Project.Application\Unicam.Paradigmi.Project.Application.csproj" />
       <ProjectReference Include="..\Unicam.Paradigmi.Project.Infrastructure\Unicam.Paradigmi.Project.Infrastructure.csproj" />
+      <ProjectReference Include="..\Unicam.Paradigmi.Project.Model\Unicam.Paradigmi.Project.Model.csproj" />
     </ItemGroup>
 
 </Project>

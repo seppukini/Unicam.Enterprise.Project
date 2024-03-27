@@ -1,9 +1,11 @@
+using Unicam.Paradigmi.Project.Application.Extensions;
 using Unicam.Paradigmi.Project.Infrastructure.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services
-    .AddInfrastructureServices(builder.Configuration);
+    .AddInfrastructureServices(builder.Configuration)
+    .AddApplicationServices(builder.Configuration);
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
