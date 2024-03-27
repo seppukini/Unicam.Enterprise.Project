@@ -8,6 +8,16 @@ Unicam.Paradigmi.Project.Web/bin
 Unicam.Paradigmi.Project.Model/bin
 Unicam.Paradigmi.Project.Model/bin/*
 
+Unicam.Paradigmi.Project.Application/obj/*
+Unicam.Paradigmi.Project.Application/obj
+Unicam.Paradigmi.Project.Infrastructure/obj
+Unicam.Paradigmi.Project.Infrastructure/obj/*
+
+Unicam.Paradigmi.Project.Application/bin/*
+Unicam.Paradigmi.Project.Application/bin
+Unicam.Paradigmi.Project.Infrastructure/bin
+Unicam.Paradigmi.Project.Infrastructure/bin/*
+
 .idea
 .idea/*
 
@@ -15,6 +25,8 @@ Unicam.Paradigmi.Project.Model/bin/*
 
 Unicam.Paradigmi.Project.Web/.DS_Store
 Unicam.Paradigmi.Project.Model/.DS_Store
+Unicam.Paradigmi.Project.Application/.DS_Store
+Unicam.Paradigmi.Project.Infrastructure/.DS_Store
 
 .vs
 .vs/*
