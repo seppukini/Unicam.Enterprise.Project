@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicam.Paradigmi.Project.We
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicam.Paradigmi.Project.Model", "Unicam.Paradigmi.Project.Model\Unicam.Paradigmi.Project.Model.csproj", "{C9CD81D4-CDE8-4DC6-87EB-9727EFC719B0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unicam.Paradigmi.Project.Infrastructure", "Unicam.Paradigmi.Project.Infrastructure\Unicam.Paradigmi.Project.Infrastructure.csproj", "{2855CBCA-2990-4586-902E-998CCE69C2C3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{C9CD81D4-CDE8-4DC6-87EB-9727EFC719B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C9CD81D4-CDE8-4DC6-87EB-9727EFC719B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C9CD81D4-CDE8-4DC6-87EB-9727EFC719B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2855CBCA-2990-4586-902E-998CCE69C2C3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2855CBCA-2990-4586-902E-998CCE69C2C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2855CBCA-2990-4586-902E-998CCE69C2C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2855CBCA-2990-4586-902E-998CCE69C2C3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

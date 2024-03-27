@@ -15,4 +15,8 @@
       <Folder Include="Controllers\" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Unicam.Paradigmi.Project.Infrastructure\Unicam.Paradigmi.Project.Infrastructure.csproj" />
+    </ItemGroup>
+
 </Project>
