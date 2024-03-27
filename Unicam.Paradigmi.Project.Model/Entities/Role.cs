@@ -2,6 +2,6 @@ namespace Unicam.Paradigmi.Project.Model.Entities;
 
 public enum Role
 {
-    Customer,
-    Admin
+    Customer = 0,
+    Admin = 1
 }
