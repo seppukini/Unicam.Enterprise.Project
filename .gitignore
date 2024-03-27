@@ -2,17 +2,15 @@ Unicam.Paradigmi.Project.Web/obj/*
 Unicam.Paradigmi.Project.Web/obj
 Unicam.Paradigmi.Project.Model/obj
 Unicam.Paradigmi.Project.Model/obj/*
-
-Unicam.Paradigmi.Project.Web/bin/*
-Unicam.Paradigmi.Project.Web/bin
-Unicam.Paradigmi.Project.Model/bin
-Unicam.Paradigmi.Project.Model/bin/*
-
 Unicam.Paradigmi.Project.Application/obj/*
 Unicam.Paradigmi.Project.Application/obj
 Unicam.Paradigmi.Project.Infrastructure/obj
 Unicam.Paradigmi.Project.Infrastructure/obj/*
 
+Unicam.Paradigmi.Project.Web/bin/*
+Unicam.Paradigmi.Project.Web/bin
+Unicam.Paradigmi.Project.Model/bin
+Unicam.Paradigmi.Project.Model/bin/*
 Unicam.Paradigmi.Project.Application/bin/*
 Unicam.Paradigmi.Project.Application/bin
 Unicam.Paradigmi.Project.Infrastructure/bin
