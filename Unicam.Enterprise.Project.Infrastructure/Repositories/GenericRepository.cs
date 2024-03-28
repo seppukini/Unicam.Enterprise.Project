@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Unicam.Paradigmi.Project.Infrastructure.Context;
+using Unicam.Enterprise.Project.Infrastructure.Context;
 
-namespace Unicam.Paradigmi.Project.Infrastructure.Repositories;
+namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
 public abstract class GenericRepository<T> where T : class
 {

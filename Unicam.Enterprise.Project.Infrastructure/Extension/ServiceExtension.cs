@@ -1,10 +1,10 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Unicam.Paradigmi.Project.Infrastructure.Context;
-using Unicam.Paradigmi.Project.Infrastructure.Repositories;
+using Unicam.Enterprise.Project.Infrastructure.Context;
+using Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-namespace Unicam.Paradigmi.Project.Infrastructure.Extension;
+namespace Unicam.Enterprise.Project.Infrastructure.Extension;
 
 public static class ServiceExtension
 {

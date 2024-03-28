@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
-using Unicam.Paradigmi.Project.Model.Entities;
+using Unicam.Enterprise.Project.Model.Entities;
 
-namespace Unicam.Paradigmi.Project.Infrastructure.Context;
+namespace Unicam.Enterprise.Project.Infrastructure.Context;
 
 public class MyDbContext : DbContext
 {

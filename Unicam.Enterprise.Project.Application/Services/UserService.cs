@@ -1,20 +1,24 @@
-using Unicam.Paradigmi.Project.Application.Services.Abstractions;
-using Unicam.Paradigmi.Project.Infrastructure.Repositories;
-using Unicam.Paradigmi.Project.Model.Entities;
+using AutoMapper;
+using Unicam.Enterpise.Project.Application.Models.Dtos;
+using Unicam.Enterpise.Project.Application.Services.Abstractions;
+using Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-namespace Unicam.Paradigmi.Project.Application.Services;
+namespace Unicam.Enterpise.Project.Application.Services;
 
 public class UserService : IUserService
 {
     private readonly UserRepository _userRepository;
+    private readonly IMapper _mapper;
     
-    public UserService(UserRepository userRepository)
+    public UserService(UserRepository userRepository, IMapper mapper)
     {
         _userRepository = userRepository;
+        _mapper = mapper;
     }
     
-    public User GetUser(int id)
+    public UserDto GetUser(int id)
     {
-        return _userRepository.Get(id);
+        var user = _userRepository.Get(id);
+        return _mapper.Map<UserDto>(user);
     }
 }

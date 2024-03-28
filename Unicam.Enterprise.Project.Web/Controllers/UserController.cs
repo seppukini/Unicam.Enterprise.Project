@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
-using Unicam.Paradigmi.Project.Application.Services.Abstractions;
+using Unicam.Enterpise.Project.Application.Services.Abstractions;
 
-namespace Unicam.Paradigmi.Project.Controllers;
+namespace Unicam.Enterprise.Project.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]

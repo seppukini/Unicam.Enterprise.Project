@@ -1,5 +1,5 @@
 
-namespace Unicam.Paradigmi.Project.Extensions;
+namespace Unicam.Enterprise.Project.Extensions;
 
 public static class ServiceExtension
 {

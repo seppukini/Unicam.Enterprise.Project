@@ -4,7 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Unicam.Paradigmi.Project.Infrastructure</RootNamespace>
+        <RootNamespace>Unicam.Enterprise.Project.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>

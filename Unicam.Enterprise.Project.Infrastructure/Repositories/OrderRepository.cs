@@ -1,7 +1,7 @@
-using Unicam.Paradigmi.Project.Infrastructure.Context;
-using Unicam.Paradigmi.Project.Model.Entities;
+using Unicam.Enterprise.Project.Infrastructure.Context;
+using Unicam.Enterprise.Project.Model.Entities;
 
-namespace Unicam.Paradigmi.Project.Infrastructure.Repositories;
+namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
 public class OrderRepository : GenericRepository<Order>
 {

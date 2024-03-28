@@ -1,4 +1,4 @@
-namespace Unicam.Paradigmi.Project.Model.Entities;
+namespace Unicam.Enterprise.Project.Model.Entities;
 
 public enum CourseKindOf
 {

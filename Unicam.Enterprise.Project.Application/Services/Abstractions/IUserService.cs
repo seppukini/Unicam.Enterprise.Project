@@ -1,9 +1,8 @@
-using Unicam.Paradigmi.Project.Application.Models.Dtos;
-using Unicam.Paradigmi.Project.Model.Entities;
+using Unicam.Enterpise.Project.Application.Models.Dtos;
 
-namespace Unicam.Paradigmi.Project.Application.Services.Abstractions;
+namespace Unicam.Enterpise.Project.Application.Services.Abstractions;
 
 public interface IUserService
 {
-    User GetUser(int id); 
+    UserDto GetUser(int id); 
 }

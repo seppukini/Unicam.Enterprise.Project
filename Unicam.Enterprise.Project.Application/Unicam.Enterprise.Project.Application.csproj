@@ -4,7 +4,7 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <RootNamespace>Unicam.Paradigmi.Project.Application</RootNamespace>
+        <RootNamespace>Unicam.Enterpise.Project.Application</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,6 +17,10 @@
     <ItemGroup>
       <ProjectReference Include="..\Unicam.Enterprise.Project.Infrastructure\Unicam.Enterprise.Project.Infrastructure.csproj" />
       <ProjectReference Include="..\Unicam.Enterprise.Project.Model\Unicam.Enterprise.Project.Model.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="AutoMapper" Version="13.0.1" />
     </ItemGroup>
 
 </Project>

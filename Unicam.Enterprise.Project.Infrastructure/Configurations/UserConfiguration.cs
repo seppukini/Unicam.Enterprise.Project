@@ -1,8 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Unicam.Paradigmi.Project.Model.Entities;
+using Unicam.Enterprise.Project.Model.Entities;
 
-namespace Unicam.Paradigmi.Project.Infrastructure.Configurations;
+namespace Unicam.Enterprise.Project.Infrastructure.Configurations;
 
 public class UserConfiguration : IEntityTypeConfiguration<User>
 {

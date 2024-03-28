@@ -1,6 +1,6 @@
-using Unicam.Paradigmi.Project.Application.Extensions;
-using Unicam.Paradigmi.Project.Extensions;
-using Unicam.Paradigmi.Project.Infrastructure.Extension;
+using Unicam.Enterpise.Project.Application.Extensions;
+using Unicam.Enterprise.Project.Extensions;
+using Unicam.Enterprise.Project.Infrastructure.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
 
