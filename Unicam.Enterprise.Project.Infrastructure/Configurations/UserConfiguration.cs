@@ -9,8 +9,8 @@ public class UserConfiguration : IEntityTypeConfiguration<User>
     public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.ToTable("Users");
-        builder.HasKey(p => p.Id);
-        builder.Property(p => p.Role)
+        builder.HasKey(u => u.Id);
+        builder.Property(u => u.Role)
             .HasConversion<int>();
     }
 }

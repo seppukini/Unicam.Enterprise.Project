@@ -9,8 +9,8 @@ public class CourseConfiguration : IEntityTypeConfiguration<Course>
     public void Configure(EntityTypeBuilder<Course> builder)
     {
         builder.ToTable("Courses");
-        builder.HasKey(p => p.Id);
-        builder.Property(p => p.Type)
+        builder.HasKey(c => c.Id);
+        builder.Property(c => c.Type)
             .HasConversion<int>();
     }
 }

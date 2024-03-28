@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Unicam.Paradigmi.Project.Application.Abstractions.Services;
-using Unicam.Paradigmi.Project.Model.Entities;
+using Unicam.Paradigmi.Project.Application.Services.Abstractions;
 
 namespace Unicam.Paradigmi.Project.Controllers;
 
@@ -15,19 +14,10 @@ public class UserController : ControllerBase
         _userService = userService;
     }
     
-    [HttpPost]
-    [Route("new")]
-    public IActionResult CreateUser(User user)
-    {
-        _userService.AddUser(user);
-        return Ok("User created successfully!");
-    }
-    
     [HttpGet]
     [Route("get/{id:int}")]
-    public User GetUser(int id)
+    public IActionResult GetUser(int id)
     {
-        return _userService.GetUser(id);
+        return Ok(_userService.GetUser(id));
     }
-    
 }

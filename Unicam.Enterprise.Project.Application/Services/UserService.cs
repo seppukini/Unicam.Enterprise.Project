@@ -1,4 +1,4 @@
-using Unicam.Paradigmi.Project.Application.Abstractions.Services;
+using Unicam.Paradigmi.Project.Application.Services.Abstractions;
 using Unicam.Paradigmi.Project.Infrastructure.Repositories;
 using Unicam.Paradigmi.Project.Model.Entities;
 
@@ -16,11 +16,5 @@ public class UserService : IUserService
     public User GetUser(int id)
     {
         return _userRepository.Get(id);
-    }
-    
-    public void AddUser(User user)
-    {
-        _userRepository.Add(user);
-        _userRepository.Save();
     }
 }

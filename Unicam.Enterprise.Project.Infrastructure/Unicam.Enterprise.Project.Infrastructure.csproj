@@ -4,10 +4,11 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
+        <RootNamespace>Unicam.Paradigmi.Project.Infrastructure</RootNamespace>
     </PropertyGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Unicam.Paradigmi.Project.Model\Unicam.Paradigmi.Project.Model.csproj" />
+      <ProjectReference Include="..\Unicam.Enterprise.Project.Model\Unicam.Enterprise.Project.Model.csproj" />
     </ItemGroup>
 
     <ItemGroup>

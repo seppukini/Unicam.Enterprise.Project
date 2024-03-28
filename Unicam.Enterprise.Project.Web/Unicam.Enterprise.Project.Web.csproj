@@ -12,8 +12,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\Unicam.Paradigmi.Project.Application\Unicam.Paradigmi.Project.Application.csproj" />
-      <ProjectReference Include="..\Unicam.Paradigmi.Project.Infrastructure\Unicam.Paradigmi.Project.Infrastructure.csproj" />
+      <ProjectReference Include="..\Unicam.Enterprise.Project.Application\Unicam.Enterprise.Project.Application.csproj" />
+      <ProjectReference Include="..\Unicam.Enterprise.Project.Infrastructure\Unicam.Enterprise.Project.Infrastructure.csproj" />
     </ItemGroup>
 
 </Project>

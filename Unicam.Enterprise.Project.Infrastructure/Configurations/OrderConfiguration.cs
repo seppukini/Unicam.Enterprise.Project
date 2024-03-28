@@ -9,12 +9,12 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     public void Configure(EntityTypeBuilder<Order> builder)
     {
         builder.ToTable("Orders");
-        builder.HasKey(p => p.Id);
+        builder.HasKey(o => o.Id);
         builder.OwnsOne(o => o.DeliveryAddress);
-        builder.HasOne(x => x.User)
-            .WithMany(x => x.Orders)
-            .HasForeignKey(x => x.UserId);
-        builder.HasMany(x => x.Courses)
+        builder.HasOne(o => o.User)
+            .WithMany(u => u.Orders)
+            .HasForeignKey(o => o.UserId);
+        builder.HasMany(o => o.Courses)
             .WithMany(c => c.Orders)
             .UsingEntity(j => j.ToTable("OrderCourses"));
     }
