@@ -2,18 +2,12 @@
 **/obj/
 **/bin/
 
-# JetBrains IDE configuration directory
+# Rider IDE
 .idea/
+*.DotSettings
 
 # macOS Finder metadata files
 .DS_Store
 
-# Visual Studio IDE directory
+# Visual Studio IDE
 .vs/
-
-# User-specific files
-*.rsuser
-*.suo
-*.user
-*.userosscache
-*.sln.docstates

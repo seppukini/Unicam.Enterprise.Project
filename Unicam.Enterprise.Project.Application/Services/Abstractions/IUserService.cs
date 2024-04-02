@@ -1,6 +1,6 @@
-using Unicam.Enterpise.Project.Application.Models.Dtos;
+using Unicam.Enterprise.Project.Application.Models.Dtos;
 
-namespace Unicam.Enterpise.Project.Application.Services.Abstractions;
+namespace Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 public interface IUserService
 {

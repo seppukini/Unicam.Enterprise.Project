@@ -3,9 +3,9 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-public class UserRepository : GenericRepository<User>
+public class CourseRepositoryBase : RepositoryBase<Course>
 {
-    public UserRepository(MyDbContext ctx) : base(ctx)
+    public CourseRepositoryBase(MyDbContext context) : base(context)
     {
     }
 }

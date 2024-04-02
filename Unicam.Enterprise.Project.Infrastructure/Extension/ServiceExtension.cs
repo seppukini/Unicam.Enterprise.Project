@@ -12,8 +12,8 @@ public static class ServiceExtension
     {
         services.AddDbContext<MyDbContext>(conf => 
             conf.UseSqlServer(configuration.GetConnectionString("MyDbContext")));
-        services.AddScoped<UserRepository>();
-        services.AddScoped<OrderRepository>();
-        services.AddScoped<CourseRepository>();
+        services.AddScoped<UserRepositoryBase>();
+        services.AddScoped<OrderRepositoryBase>();
+        services.AddScoped<CourseRepositoryBase>();
     }
 }

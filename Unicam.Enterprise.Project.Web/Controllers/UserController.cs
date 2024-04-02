@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Unicam.Enterpise.Project.Application.Services.Abstractions;
+using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
 

@@ -1,5 +1,5 @@
 
-namespace Unicam.Enterpise.Project.Application.Models.Dtos;
+namespace Unicam.Enterprise.Project.Application.Models.Dtos;
 
 public class UserDto
 {
