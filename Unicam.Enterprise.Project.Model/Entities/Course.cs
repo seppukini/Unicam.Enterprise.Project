@@ -7,5 +7,5 @@ public class Course
     public string Price { get; set; } = string.Empty;
     public CourseKindOf Type { get; set; }
     
-    public ICollection<Order> Orders { get; set; } = null!;
+    public ICollection<Order> Orders { get; set; } = new List<Order>();
 }

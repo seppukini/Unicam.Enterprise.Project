@@ -5,9 +5,7 @@ namespace Unicam.Enterprise.Project.Infrastructure.Context;
 
 public class MyDbContext : DbContext
 {
-    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options)
-    {
-    }
+    public MyDbContext(DbContextOptions<MyDbContext> options) : base(options) { }
     
     public DbSet<User>? Users { get; set; }
     public DbSet<Course>? Courses { get; set; }

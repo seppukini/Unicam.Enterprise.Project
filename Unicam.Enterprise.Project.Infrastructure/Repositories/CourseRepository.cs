@@ -3,9 +3,7 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-public class CourseRepositoryBase : RepositoryBase<Course>
+public class CourseRepository : RepositoryBase<Course>
 {
-    public CourseRepositoryBase(MyDbContext context) : base(context)
-    {
-    }
+    public CourseRepository(MyDbContext context) : base(context) { }
 }

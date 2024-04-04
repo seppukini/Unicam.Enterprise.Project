@@ -8,19 +8,14 @@
     </PropertyGroup>
 
     <ItemGroup>
-      <Folder Include="Models\Requests\" />
-      <Folder Include="Models\Responses\" />
-      <Folder Include="Services\Abstractions\" />
-      <Folder Include="Validators\" />
-    </ItemGroup>
-
-    <ItemGroup>
       <ProjectReference Include="..\Unicam.Enterprise.Project.Infrastructure\Unicam.Enterprise.Project.Infrastructure.csproj" />
       <ProjectReference Include="..\Unicam.Enterprise.Project.Model\Unicam.Enterprise.Project.Model.csproj" />
     </ItemGroup>
 
     <ItemGroup>
       <PackageReference Include="AutoMapper" Version="13.0.1" />
+      <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />
+      <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
     </ItemGroup>
 
 </Project>

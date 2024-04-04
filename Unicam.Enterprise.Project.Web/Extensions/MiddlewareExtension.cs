@@ -9,11 +9,9 @@ public static class MiddlewareExtension
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        
         app.UseHttpsRedirection();
-        // app.UseAuthentication();
+        app.UseAuthentication();
         app.UseAuthorization();
-        
         app.MapControllers();
     }
 }

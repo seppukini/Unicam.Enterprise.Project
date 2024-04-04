@@ -6,29 +6,29 @@ namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 public abstract class RepositoryBase<TEntity> where TEntity : class
 {
     private readonly MyDbContext _context;
-    private readonly DbSet<TEntity> _dbSet;
+    protected readonly DbSet<TEntity> DbSet;
     
-    // TODO: valutare se inserire metodi asincroni
+    // TODO: consider adding async methods
     
     protected RepositoryBase(MyDbContext context)
     {
         _context = context;
-        _dbSet = context.Set<TEntity>();
+        DbSet = context.Set<TEntity>();
     }
     
     public IEnumerable<TEntity> GetAll()
     {
-        return _dbSet.ToList();
+        return DbSet.ToList();
     }
     
     public TEntity? GetById(int id)
     {
-        return _dbSet.Find(id);
+        return DbSet.Find(id);
     }
     
     public void Insert(TEntity entity)
     {
-        _dbSet.Add(entity);
+        DbSet.Add(entity);
     }
     
     public void Update(TEntity entity)
@@ -38,10 +38,10 @@ public abstract class RepositoryBase<TEntity> where TEntity : class
     
     public void Delete(int id)
     {
-        var entity = _dbSet.Find(id);
+        var entity = DbSet.Find(id);
         if (entity != null)
         {
-            _dbSet.Remove(entity);
+            DbSet.Remove(entity);
         }
     }
     

@@ -3,9 +3,7 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-public class OrderRepositoryBase : RepositoryBase<Order>
+public class OrderRepository : RepositoryBase<Order>
 {
-    public OrderRepositoryBase(MyDbContext context) : base(context)
-    {
-    }
+    public OrderRepository(MyDbContext context) : base(context) { }
 }

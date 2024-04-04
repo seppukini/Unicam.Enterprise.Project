@@ -5,6 +5,7 @@
 # Rider IDE
 .idea/
 *.DotSettings
+*.DotSettings.user
 
 # macOS Finder metadata files
 .DS_Store
