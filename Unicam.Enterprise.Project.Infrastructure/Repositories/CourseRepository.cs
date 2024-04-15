@@ -6,4 +6,9 @@ namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 public class CourseRepository : RepositoryBase<Course>
 {
     public CourseRepository(MyDbContext context) : base(context) { }
+
+    public List<Course> FindByIds(IEnumerable<int> ids)
+    {
+        return DbSet.Where(course => ids.Contains(course.Id)).ToList();
+    }
 }

@@ -11,4 +11,9 @@ public class UserRepository : RepositoryBase<User>
     {
         return DbSet.FirstOrDefault(x => x.Email == email);
     }
+
+    public User? FindById(int id)
+    {
+        return DbSet.FirstOrDefault(x => x.Id == id);
+    }
 }
