@@ -12,4 +12,5 @@ public class OrderDto
     public List<CourseDto> Courses { get; init; } = new List<CourseDto>();
     public int UserId { get; init; }
     public UserDto User { get; init; } = new UserDto();
+    public string TotalPrice { get; init; } = string.Empty;
 }

@@ -16,7 +16,8 @@ public class OrderService : IOrderService
     private readonly UserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public OrderService(OrderRepository orderRepository, CourseRepository courseRepository, UserRepository userRepository, IMapper mapper)
+    public OrderService(OrderRepository orderRepository, CourseRepository courseRepository,
+        UserRepository userRepository, IMapper mapper)
     {
         _orderRepository = orderRepository;
         _courseRepository = courseRepository;
@@ -40,17 +41,48 @@ public class OrderService : IOrderService
 
         var order = new Order
         {
+            UserId = user.Id,
             Date = request.Date,
             DeliveryAddress = _mapper.Map<Address>(request.DeliveryAddress),
-            UserId = user.Id,
-            Courses = courses
+            Courses = new List<Course>()
         };
+
+        foreach (var course in courses)
+        {
+            order.Courses.Add(course);
+        }
+
+        // Calculate total price and apply discounts if applicable
+        decimal totalPrice = order.Courses.Sum(c => decimal.Parse(c.Price));
+        if (IsCompleteMeal(order.Courses))
+        {
+            totalPrice *= 0.9m; // 10% discount for complete meal
+        }
 
         _orderRepository.Insert(order);
         _orderRepository.Save();
 
-        return _mapper.Map<OrderDto>(order);
+        return new OrderDto
+        {
+            Id = order.Id,
+            Date = order.Date,
+            DeliveryAddress = _mapper.Map<AddressDto>(order.DeliveryAddress),
+            Courses = _mapper.Map<List<CourseDto>>(order.Courses),
+            UserId = order.UserId,
+            User = _mapper.Map<UserDto>(user),
+            TotalPrice = totalPrice.ToString("F2")
+        };
     }
+
+    private bool IsCompleteMeal(ICollection<Course> courses)
+    {
+        var courseTypes = courses.Select(c => c.Type).Distinct().ToList();
+        
+        return courseTypes.Count == 4 && courseTypes.Contains(CourseType.Main) &&
+               courseTypes.Contains(CourseType.Second) && courseTypes.Contains(CourseType.Side) &&
+               courseTypes.Contains(CourseType.Dessert);
+    }
+
 
     public IEnumerable<OrderDto> GetOrders()
     {
