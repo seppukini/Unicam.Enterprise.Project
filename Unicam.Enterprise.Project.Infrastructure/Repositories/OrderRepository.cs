@@ -1,6 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Unicam.Enterprise.Project.Infrastructure.Context;
 using Unicam.Enterprise.Project.Model.Entities;
 

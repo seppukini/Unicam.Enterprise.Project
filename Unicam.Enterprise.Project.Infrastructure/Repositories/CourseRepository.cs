@@ -9,6 +9,6 @@ public class CourseRepository : RepositoryBase<Course>
 
     public List<Course> FindByIds(IEnumerable<int> ids)
     {
-        return DbSet.Where(course => ids.Contains(course.Id)).ToList();
+        return DbSet.Where(c => ids.Contains(c.Id)).ToList();
     }
 }

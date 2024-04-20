@@ -1,4 +1,5 @@
 using System.IdentityModel.Tokens.Jwt;
+using System.Security.Authentication;
 using System.Security.Claims;
 using System.Text;
 using AutoMapper;
@@ -40,7 +41,7 @@ public class UserService : IUserService
         var user = _userRepository.GetUserByEmail(request.Email);
         if (user == null || user.Password != request.Password)
         {
-            return string.Empty; // user not found or wrong password
+            throw new AuthenticationException("User not found.");
         }
         return GenerateJwtToken(CreateClaims(user));
     }

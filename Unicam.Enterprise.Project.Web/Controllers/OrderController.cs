@@ -1,55 +1,38 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Collections.Generic;
-using Unicam.Enterprise.Project.Application.Models.DTOs;
+using System.Security.Claims;
 using Unicam.Enterprise.Project.Application.Models.Requests;
-using Unicam.Enterprise.Project.Application.Services;
+using Unicam.Enterprise.Project.Application.Models.Responses;
+using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
-// TODO: make an application to properly generate these and a postman template to test these
-// [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class OrderController : ControllerBase
 {
-    private readonly OrderService _orderService;
-
-    public OrderController(OrderService orderService)
+    private readonly IOrderService _orderService;
+    private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier);
+    
+    public OrderController(IOrderService orderService)
     {
         _orderService = orderService;
     }
-
+    
     [HttpPost]
-    public IActionResult CreateOrder([FromBody] CreateOrderRequest request)
+    [Route("create")]
+    public IActionResult CreateOrder(CreateOrderRequest request)
     {
         try
         {
-            var orderDto = _orderService.CreateOrder(request);
-            return CreatedAtAction(nameof(GetOrder), new { id = orderDto.Id }, orderDto);
+            var orderDto = _orderService.CreateOrder(request, int.Parse(UserId), out var totalPrice);
+            return Ok(new CreateOrderResponse(orderDto.Id, totalPrice));
         }
-        catch (KeyNotFoundException ex)
+        catch (Exception e)
         {
-            return NotFound(ex.Message);
+            return BadRequest(e.Message);
         }
-    }
-
-    [HttpGet("{id}")]
-    public IActionResult GetOrder(int id)
-    {
-        var order = _orderService.GetOrders().FirstOrDefault(o => o.Id == id);
-        if (order == null)
-        {
-            return NotFound("Order not found.");
-        }
-        return Ok(order);
-    }
-
-    [HttpGet]
-    public IActionResult GetOrders()
-    {
-        var orders = _orderService.GetOrders();
-        return Ok(orders);
     }
 }

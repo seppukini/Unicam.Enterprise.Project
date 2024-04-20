@@ -12,6 +12,7 @@ public static class ServiceExtension
         services.AddValidatorsFromAssemblies(AppDomain.CurrentDomain.GetAssemblies());
         services.AddScoped<IUserService, UserService>();
         services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<IHistoryService, HistoryService>();
         services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
     }
 }

@@ -28,7 +28,14 @@ public class UserController : ControllerBase
     [Route("login")]
     public IActionResult Login(LoginRequest request)
     {
-        var token = _userService.Login(request);
-        return Ok(new LoginResponse(token));
+        try
+        {
+            var token = _userService.Login(request);
+            return Ok(new LoginResponse(token));
+        }
+        catch (Exception e)
+        {
+            return BadRequest(e.Message);
+        }
     }
 }

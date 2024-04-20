@@ -1,3 +1,4 @@
+
 namespace Unicam.Enterprise.Project.Model.Entities;
 
 public enum Role

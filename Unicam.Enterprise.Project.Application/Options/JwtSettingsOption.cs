@@ -1,3 +1,4 @@
+
 namespace Unicam.Enterprise.Project.Application.Options;
 
 public class JwtSettingsOption

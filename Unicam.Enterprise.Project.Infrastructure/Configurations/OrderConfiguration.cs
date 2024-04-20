@@ -10,7 +10,12 @@ public class OrderConfiguration : IEntityTypeConfiguration<Order>
     {
         builder.ToTable("Orders");
         builder.HasKey(o => o.Id);
-        builder.OwnsOne(o => o.DeliveryAddress);
+        builder.OwnsOne(o => o.DeliveryAddress, address =>
+        {
+            address.Property(a => a.Street).HasColumnName("Street");
+            address.Property(a => a.City).HasColumnName("City");
+            address.Property(a => a.ZipCode).HasColumnName("ZipCode");
+        });
         builder.HasOne(o => o.User)
             .WithMany(u => u.Orders)
             .HasForeignKey(o => o.UserId);

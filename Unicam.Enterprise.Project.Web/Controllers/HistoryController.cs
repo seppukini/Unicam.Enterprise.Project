@@ -1,27 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Unicam.Enterprise.Project.Application.Models.Requests;
-using Unicam.Enterprise.Project.Application.Services;
+using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
-using Unicam.Enterprise.Project.Application.Models.DTOs;
 
+namespace Unicam.Enterprise.Project.Controllers;
 
-namespace Unicam.Enterprise.Project.Controllers
+[Route("api/v1/[controller]")]
+[ApiController]
+[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+public class HistoryController : ControllerBase
 {
-    public class HistoryController : ControllerBase
+    private readonly IHistoryService _historyService;
+    private string UserId => User.FindFirstValue(ClaimTypes.NameIdentifier);
+    private string UserRole => User.FindFirstValue(ClaimTypes.Role);
+    
+    public HistoryController(IHistoryService historyService)
     {
-
-        private readonly HistoryService _historyService;
-        public HistoryController(HistoryService elem)
+        _historyService = historyService;
+    }
+    
+    [HttpPost]
+    [Route("history")]
+    public IActionResult GetOrderHistory(GetOrderHistoryRequest request)
+    {
+        try
         {
-            _historyService = elem;
+            var orderDtos = _historyService.GetOrderHistory(request, int.Parse(UserId), UserRole);
+            return Ok(new GetOrderHistoryResponse(orderDtos));
         }
-
-
-        [HttpGet]
-        public IActionResult GetHistory(HistoryDto dto)
+        catch (Exception e)
         {
-            var elem = _historyService.GetOrderHistory(dto.StartDate, dto.EndDate, dto.UserId, dto.userRoleId, dto.pageIndex, dto.pageSize);
-            return Ok(elem);
+            return BadRequest(e.Message);
         }
     }
 }
+

@@ -1,3 +1,4 @@
+
 namespace Unicam.Enterprise.Project.Extensions;
 
 public static class MiddlewareExtension
