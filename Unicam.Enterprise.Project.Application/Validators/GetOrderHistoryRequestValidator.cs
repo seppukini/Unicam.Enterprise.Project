@@ -14,19 +14,19 @@ namespace Unicam.Enterprise.Project.Application.Validators
         {
 
             RuleFor(e => e.StartDate)
-                .NotEmpty().WithMessage(" Start Date must be Specified ");
+                .NotEmpty().WithMessage (" Start Date must be Specified ");
 
             RuleFor (e => e.EndDate)
-                .NotEmpty().WithMessage("Not a Date Found")
-                .GreaterThan(elem => elem.StartDate).WithMessage("Start Date could not be forward then End Date");
+                .NotEmpty().WithMessage ("Not a Date Found")
+                .GreaterThan (elem => elem.StartDate).WithMessage ("Start Date could not be forward then End Date");  // elem.StartDate is a legal statement ?
 
             RuleFor(e => e.PageIndex)
-                .NotEmpty().WithMessage(" Index Page could not be an Empty Page ")
-                .GreaterThanOrEqualTo(1).WithMessage(" At least one Index Page ");
+                .NotEmpty().WithMessage (" Index Page could not be an Empty Page ")
+                .GreaterThanOrEqualTo(1).WithMessage (" At least one Index Page ");
 
             RuleFor (e => e.PageSize)
-                .Empty ().WithMessage(" Must have some size ")
-                .GreaterThanOrEqualTo(1).WithMessage(" At least size one ");
+                .NotEmpty ().WithMessage (" Must have some size ")
+                .GreaterThanOrEqualTo (1).WithMessage (" At least size one ");
 
         }
     }
