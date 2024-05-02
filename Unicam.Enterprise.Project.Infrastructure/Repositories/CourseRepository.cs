@@ -11,4 +11,11 @@ public class CourseRepository : RepositoryBase<Course>
     {
         return DbSet.Where(c => ids.Contains(c.Id)).ToList();
     }
+    
+    public IEnumerable<Course> GetCoursesByOrderId(int orderId)
+    {
+        return DbSet
+            .Where(course => course.Orders.Any(order => order.Id == orderId))
+            .ToList();
+    }
 }

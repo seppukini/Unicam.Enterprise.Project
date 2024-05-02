@@ -9,14 +9,17 @@ namespace Unicam.Enterprise.Project.Application.Services;
 
 public class HistoryService : IHistoryService
 {
+    private readonly CourseRepository _courseRepository;
     private readonly OrderRepository _orderRepository;
     private readonly UserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public HistoryService(OrderRepository orderRepository, UserRepository userRepository, IMapper mapper)
+    public HistoryService(OrderRepository orderRepository, UserRepository userRepository, 
+        CourseRepository courseRepository, IMapper mapper)
     {
         _orderRepository = orderRepository;
         _userRepository = userRepository;
+        _courseRepository = courseRepository;
         _mapper = mapper;
     }
 
@@ -39,10 +42,17 @@ public class HistoryService : IHistoryService
             orders = orders.Where(o => o.UserId == userId);
         }
         
-        return orders
+        var orderList = orders
             .Skip(request.PageSize * (request.PageIndex - 1))
             .Take(request.PageSize)
-            .Select(o => _mapper.Map<OrderDto>(o))
             .ToList();
+
+        foreach (var order in orderList)
+        {
+            // Explicitly load courses for each order
+            order.Courses = _courseRepository.GetCoursesByOrderId(order.Id).ToList();
+        }
+
+        return orderList.Select(o => _mapper.Map<OrderDto>(o)).ToList();
     }
 }
