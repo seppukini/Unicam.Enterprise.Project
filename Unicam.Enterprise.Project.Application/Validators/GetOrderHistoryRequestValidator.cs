@@ -18,7 +18,7 @@ namespace Unicam.Enterprise.Project.Application.Validators
 
             RuleFor (e => e.EndDate)
                 .NotEmpty().WithMessage ("Not a Date Found")
-                .GreaterThan (elem => elem.StartDate).WithMessage ("Start Date could not be forward then End Date");  // elem.StartDate is a legal statement ?
+                .GreaterThan (elem => elem.StartDate).WithMessage ("Start Date could not be forward then End Date");
 
             RuleFor(e => e.PageIndex)
                 .NotEmpty().WithMessage (" Index Page could not be an Empty Page ")

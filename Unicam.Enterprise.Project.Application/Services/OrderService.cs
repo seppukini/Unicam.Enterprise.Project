@@ -29,13 +29,12 @@ public class OrderService : IOrderService
         }
         
         var order = _mapper.Map<Order>(request);
+        order.Date = DateTime.Now;
         order.UserId = userId;
         foreach (var course in courses)
         {
             order.Courses.Add(course);
         }
-        _orderRepository.Insert(order);
-        _orderRepository.Save();
         
         // Calculate total price and apply discounts if applicable
         totalPrice = order.Courses.Sum(o => o.Price);
@@ -44,9 +43,10 @@ public class OrderService : IOrderService
             totalPrice *= 0.9m; // 10% discount for complete meal
         }
         
-        var orderDto = _mapper.Map<OrderDto>(order);
+        _orderRepository.Insert(order);
+        _orderRepository.Save();
         
-        return orderDto;
+        return _mapper.Map<OrderDto>(order);
     }
 
     private static bool IsCompleteMeal(IEnumerable<Course> courses)

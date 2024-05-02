@@ -30,10 +30,10 @@ public abstract class RepositoryBase<TEntity> where TEntity : class
     {
         DbSet.Add(entity);
     }
-    
+
     public void Update(TEntity entity)
     {
-        _context.Entry(entity).State = EntityState.Modified;
+        DbSet.Update(entity);
     }
     
     public void Delete(int id)
