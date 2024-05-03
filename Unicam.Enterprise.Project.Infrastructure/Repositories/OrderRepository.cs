@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Unicam.Enterprise.Project.Infrastructure.Context;
 using Unicam.Enterprise.Project.Model.Entities;
 
@@ -7,10 +8,10 @@ public class OrderRepository : RepositoryBase<Order>
 {
     public OrderRepository(MyDbContext context) : base(context) { }
 
-    public IEnumerable<Order> GetOrdersBetweenDates(DateTime startDate, DateTime endDate)
+    public async Task<IEnumerable<Order>> GetOrdersBetweenDatesAsync(DateTime startDate, DateTime endDate)
     {
-        return DbSet
+        return await DbSet
             .Where(order => order.Date >= startDate && order.Date <= endDate)
-            .ToList();
+            .ToListAsync();
     }
 }

@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using Unicam.Enterprise.Project.Infrastructure.Context;
 using Unicam.Enterprise.Project.Model.Entities;
 
@@ -7,15 +8,15 @@ public class CourseRepository : RepositoryBase<Course>
 {
     public CourseRepository(MyDbContext context) : base(context) { }
 
-    public List<Course> FindByIds(IEnumerable<int> ids)
+    public async Task<List<Course>> FindByIds(IEnumerable<int> ids)
     {
-        return DbSet.Where(c => ids.Contains(c.Id)).ToList();
+        return await DbSet.Where(c => ids.Contains(c.Id)).ToListAsync();
     }
     
-    public IEnumerable<Course> GetCoursesByOrderId(int orderId)
+    public async Task<IEnumerable<Course>> GetCoursesByOrderId(int orderId)
     {
-        return DbSet
-            .Where(course => course.Orders.Any(order => order.Id == orderId))
-            .ToList();
+        return await DbSet
+            .Where(course => (course.Orders ?? Array.Empty<Order>()).Any(order => order.Id == orderId))
+            .ToListAsync();
     }
 }

@@ -7,5 +7,5 @@ using System.Collections.Generic;
 
 public interface IHistoryService
 {
-    IEnumerable<OrderDto> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole);
+    Task<IEnumerable<OrderDto>> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole);
 }

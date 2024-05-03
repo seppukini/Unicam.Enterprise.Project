@@ -5,6 +5,6 @@ namespace Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 public interface IUserService
 { 
-    UserDto CreateUser(CreateUserRequest request);
-    string Login(LoginRequest request);
+    Task<UserDto> CreateUser(CreateUserRequest request);
+    Task<string> Login(LoginRequest request);
 }

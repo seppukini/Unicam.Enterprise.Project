@@ -23,12 +23,18 @@ public class OrderController : ControllerBase
     
     [HttpPost]
     [Route("create")]
-    public IActionResult CreateOrder(CreateOrderRequest request)
+    public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
     {
         try
         {
-            var orderDto = _orderService.CreateOrder(request, int.Parse(UserId), out var totalPrice);
-            return Ok(new CreateOrderResponse(orderDto.Id, totalPrice));
+            var response = await _orderService.CreateOrder(request, int.Parse(UserId));
+
+            if (response == null)
+            {
+                return BadRequest("No courses were found in the order.");
+            }
+            
+            return Ok(response);
         }
         catch (Exception e)
         {

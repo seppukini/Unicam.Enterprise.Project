@@ -24,11 +24,13 @@ public class HistoryController : ControllerBase
     
     [HttpPost]
     [Route("history")]
-    public IActionResult GetOrderHistory(GetOrderHistoryRequest request)
+    public async Task<IActionResult> GetOrderHistory(GetOrderHistoryRequest request)
     {
         try
         {
-            var orderDtos = _historyService.GetOrderHistory(request, int.Parse(UserId), UserRole);
+            var orderDtos = await _historyService.
+                GetOrderHistory(request, int.Parse(UserId), UserRole);
+            
             return Ok(new GetOrderHistoryResponse(orderDtos));
         }
         catch (Exception e)

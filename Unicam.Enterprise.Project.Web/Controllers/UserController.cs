@@ -18,19 +18,21 @@ public class UserController : ControllerBase
     
     [HttpPost]
     [Route("create")]
-    public IActionResult CreateUser(CreateUserRequest request)
+    public async Task<IActionResult> CreateUser(CreateUserRequest request)
     {
-        var user = _userService.CreateUser(request);
+        var user = await _userService.CreateUser(request);
+        
         return Ok(new CreateUserResponse(user));
     }
     
     [HttpPost]
     [Route("login")]
-    public IActionResult Login(LoginRequest request)
+    public async Task<IActionResult> Login(LoginRequest request)
     {
         try
         {
-            var token = _userService.Login(request);
+            var token = await _userService.Login(request);
+            
             return Ok(new LoginResponse(token));
         }
         catch (Exception e)

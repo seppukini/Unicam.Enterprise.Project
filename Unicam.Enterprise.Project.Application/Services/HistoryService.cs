@@ -23,9 +23,9 @@ public class HistoryService : IHistoryService
         _mapper = mapper;
     }
 
-    public IEnumerable<OrderDto> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole)
+    public async Task<IEnumerable<OrderDto>> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole)
     {
-        var orders = _orderRepository.GetOrdersBetweenDates(request.StartDate, request.EndDate);
+        var orders = await _orderRepository.GetOrdersBetweenDatesAsync(request.StartDate, request.EndDate);
         
         // apply a filter if the user is an admin and the request contains a UserId
         if (request.UserId.HasValue && userRole == Role.Admin.ToString())
@@ -50,7 +50,8 @@ public class HistoryService : IHistoryService
         foreach (var order in orderList)
         {
             // Explicitly load courses for each order
-            order.Courses = _courseRepository.GetCoursesByOrderId(order.Id).ToList();
+            var query = await _courseRepository.GetCoursesByOrderId(order.Id);
+            order.Courses = query.ToList();
         }
 
         return orderList.Select(o => _mapper.Map<OrderDto>(o)).ToList();

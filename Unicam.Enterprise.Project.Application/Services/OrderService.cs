@@ -1,6 +1,8 @@
+using System.Diagnostics;
 using AutoMapper;
 using Unicam.Enterprise.Project.Application.Models.DTOs;
 using Unicam.Enterprise.Project.Application.Models.Requests;
+using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
 using Unicam.Enterprise.Project.Infrastructure.Repositories;
 using Unicam.Enterprise.Project.Model.Entities;
@@ -20,9 +22,10 @@ public class OrderService : IOrderService
         _mapper = mapper;
     }
     
-    public OrderDto CreateOrder(CreateOrderRequest request, int userId, out decimal totalPrice)
+    public async Task<CreateOrderResponse?> CreateOrder(CreateOrderRequest request, int userId)
     {
-        var courses = _courseRepository.FindByIds(request.CourseIds);
+        var courses = await _courseRepository.FindByIds(request.CourseIds);
+        
         if (courses.Count != request.CourseIds.Count)
         {
             throw new KeyNotFoundException("One or more courses not found.");
@@ -31,22 +34,31 @@ public class OrderService : IOrderService
         var order = _mapper.Map<Order>(request);
         order.Date = DateTime.Now;
         order.UserId = userId;
+        
         foreach (var course in courses)
         {
-            order.Courses.Add(course);
+            order.Courses?.Add(course);
         }
         
         // Calculate total price and apply discounts if applicable
-        totalPrice = order.Courses.Sum(o => o.Price);
+        if (order.Courses == null || order.Courses.Count == 0)
+        {
+            return null;
+        }
+
+        decimal totalPrice = order.Courses.Sum(o => o.Price);
         if (IsCompleteMeal(order.Courses))
         {
             totalPrice *= 0.9m; // 10% discount for complete meal
         }
-        
-        _orderRepository.Insert(order);
-        _orderRepository.Save();
-        
-        return _mapper.Map<OrderDto>(order);
+
+        await _orderRepository.Insert(order);
+        await _orderRepository.Save();
+
+        // ignore this mapping
+        _ = _mapper.Map<OrderDto>(order);
+
+        return new CreateOrderResponse(order.Id, totalPrice);
     }
 
     private static bool IsCompleteMeal(IEnumerable<Course> courses)

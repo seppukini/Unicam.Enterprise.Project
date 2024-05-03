@@ -27,22 +27,26 @@ public class UserService : IUserService
         _jwtSettingsOption = jwtSettingsOption.Value;
     }
     
-    public UserDto CreateUser(CreateUserRequest request)
+    public async Task<UserDto> CreateUser(CreateUserRequest request)
     {
         var user = _mapper.Map<User>(request);
         user.Role = Role.Customer;
-        _userRepository.Insert(user);
-        _userRepository.Save();
+        
+        await _userRepository.Insert(user);
+        await _userRepository.Save();
+        
         return _mapper.Map<UserDto>(user);
     }
     
-    public string Login(LoginRequest request)
+    public async Task<string> Login(LoginRequest request)
     {
-        var user = _userRepository.GetUserByEmail(request.Email);
+        var user = await _userRepository.GetUserByEmail(request.Email);
+        
         if (user == null || user.Password != request.Password)
         {
             throw new AuthenticationException("User not found.");
         }
+        
         return GenerateJwtToken(CreateClaims(user));
     }
     
@@ -51,9 +55,9 @@ public class UserService : IUserService
         return new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.Name),
-            new(ClaimTypes.Surname, user.Surname),
-            new(ClaimTypes.Email, user.Email),
+            new(ClaimTypes.Name, user.Name ?? throw new Exception("no name found")),
+            new(ClaimTypes.Surname, user.Surname ?? throw new Exception("no surname found")),
+            new(ClaimTypes.Email, user.Email ?? throw new Exception("no email found")),
             new(ClaimTypes.Role, user.Role.ToString())
         };
     }

@@ -16,37 +16,39 @@ public abstract class RepositoryBase<TEntity> where TEntity : class
         DbSet = context.Set<TEntity>();
     }
     
-    public IEnumerable<TEntity> GetAll()
+    public async Task<IEnumerable<TEntity>> GetAll()
     {
-        return DbSet.ToList();
+        return await DbSet.ToListAsync();
     }
     
-    public TEntity? GetById(int id)
+    public async Task<TEntity?> GetById(int id)
     {
-        return DbSet.Find(id);
+        return await DbSet.FindAsync(id);
     }
     
-    public void Insert(TEntity entity)
+    public async Task Insert(TEntity entity)
     {
-        DbSet.Add(entity);
+        await DbSet.AddAsync(entity);
     }
 
+    // no updateasync :(
     public void Update(TEntity entity)
     {
         DbSet.Update(entity);
     }
     
-    public void Delete(int id)
+    public async Task Delete(int id)
     {
-        var entity = DbSet.Find(id);
+        var entity = await DbSet.FindAsync(id);
+        
         if (entity != null)
         {
             DbSet.Remove(entity);
         }
     }
     
-    public void Save()
+    public async Task Save()
     {
-        _context.SaveChanges();
+        await _context.SaveChangesAsync();
     }
 }
