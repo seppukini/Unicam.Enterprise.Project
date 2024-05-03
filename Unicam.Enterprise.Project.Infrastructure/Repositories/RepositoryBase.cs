@@ -1,14 +1,13 @@
 using Microsoft.EntityFrameworkCore;
 using Unicam.Enterprise.Project.Infrastructure.Context;
+using Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-public abstract class RepositoryBase<TEntity> where TEntity : class
+public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where TEntity : class
 {
     private readonly MyDbContext _context;
     protected readonly DbSet<TEntity> DbSet;
-    
-    // TODO: consider adding async methods
     
     protected RepositoryBase(MyDbContext context)
     {

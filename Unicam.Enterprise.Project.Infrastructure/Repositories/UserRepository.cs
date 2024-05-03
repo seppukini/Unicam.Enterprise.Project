@@ -4,7 +4,7 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-public class UserRepository : RepositoryBase<User>
+public class UserRepository : RepositoryBase<User>, IUserRepository
 {
     public UserRepository(MyDbContext context) : base(context) { }
     

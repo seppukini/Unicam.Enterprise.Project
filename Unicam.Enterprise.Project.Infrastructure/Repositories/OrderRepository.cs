@@ -1,10 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Unicam.Enterprise.Project.Infrastructure.Context;
+using Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
-public class OrderRepository : RepositoryBase<Order>
+public class OrderRepository : RepositoryBase<Order>, IOrderRepository
 {
     public OrderRepository(MyDbContext context) : base(context) { }
 
