@@ -1,10 +1,10 @@
-using Unicam.Enterprise.Project.Application.Models.DTOs;
 using Unicam.Enterprise.Project.Application.Models.Requests;
+using Unicam.Enterprise.Project.Application.Models.Responses;
 
 namespace Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 public interface IUserService
 { 
-    Task<UserDto> CreateUser(CreateUserRequest request);
-    Task<string> Login(LoginRequest request);
+    Task<CreateUserResponse> CreateUser(CreateUserRequest request);
+    Task<LoginResponse> Login(LoginRequest request);
 }

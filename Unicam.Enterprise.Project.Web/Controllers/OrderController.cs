@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 using Unicam.Enterprise.Project.Application.Models.Requests;
-using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
@@ -28,11 +27,6 @@ public class OrderController : ControllerBase
         try
         {
             var response = await _orderService.CreateOrder(request, int.Parse(UserId));
-
-            if (response == null)
-            {
-                return BadRequest("No courses were found in the order.");
-            }
             
             return Ok(response);
         }

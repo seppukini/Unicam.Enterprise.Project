@@ -13,11 +13,4 @@ public class CourseRepository : RepositoryBase<Course>, ICourseRepository
     {
         return await DbSet.Where(c => ids.Contains(c.Id)).ToListAsync();
     }
-    
-    public async Task<IEnumerable<Course>> GetCoursesByOrderId(int orderId)
-    {
-        return await DbSet
-            .Where(course => (course.Orders ?? Array.Empty<Order>()).Any(order => order.Id == orderId))
-            .ToListAsync();
-    }
 }

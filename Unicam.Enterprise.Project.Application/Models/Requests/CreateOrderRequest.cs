@@ -4,6 +4,6 @@ namespace Unicam.Enterprise.Project.Application.Models.Requests;
 
 public class CreateOrderRequest
 {
-    public Address DeliveryAddress { get; set; } = new();
-    public List<int> CourseIds { get; set; } = new();
+    public Address DeliveryAddress { get; set; } = new ();
+    public List<int> CourseIds { get; set; } = new ();
 }

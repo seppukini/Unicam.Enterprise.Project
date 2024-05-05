@@ -30,7 +30,6 @@ public abstract class RepositoryBase<TEntity> : IRepositoryBase<TEntity> where T
         await DbSet.AddAsync(entity);
     }
 
-    // no updateasync :(
     public void Update(TEntity entity)
     {
         DbSet.Update(entity);

@@ -1,59 +1,62 @@
 using AutoMapper;
 using Unicam.Enterprise.Project.Application.Models.DTOs;
 using Unicam.Enterprise.Project.Application.Models.Requests;
+using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
-using Unicam.Enterprise.Project.Infrastructure.Repositories;
+using Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.Services;
 
 public class HistoryService : IHistoryService
 {
-    private readonly CourseRepository _courseRepository;
-    private readonly OrderRepository _orderRepository;
-    private readonly UserRepository _userRepository;
+    private readonly IOrderRepository _orderRepository;
+    private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
-    public HistoryService(OrderRepository orderRepository, UserRepository userRepository, 
-        CourseRepository courseRepository, IMapper mapper)
+    public HistoryService(IOrderRepository orderRepository, IUserRepository userRepository, IMapper mapper)
     {
         _orderRepository = orderRepository;
         _userRepository = userRepository;
-        _courseRepository = courseRepository;
         _mapper = mapper;
     }
 
-    public async Task<IEnumerable<OrderDto>> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole)
+    public async Task<GetOrderHistoryResponse> GetOrderHistory(GetOrderHistoryRequest request, int userId, 
+        string userRole)
     {
-        var orders = await _orderRepository.GetOrdersBetweenDatesAsync(request.StartDate, request.EndDate);
+        var orders = await _orderRepository.GetOrdersBetweenDatesAsync(request.StartDate, 
+            request.EndDate);
+        orders = await ApplyRoleFilter(orders, request.UserId, userId, userRole);
         
-        // apply a filter if the user is an admin and the request contains a UserId
-        if (request.UserId.HasValue && userRole == Role.Admin.ToString())
-        {
-            if (_userRepository.GetById(request.UserId.Value) == null)
-            {
-                throw new ArgumentException("User not found");
-            }
-            orders = orders.Where(o => o.UserId == request.UserId);
-        }
-        // apply a filter if the user is not an admin
-        else
-        {
-            orders = orders.Where(o => o.UserId == userId);
-        }
-        
-        var orderList = orders
+        var orderDtoList = orders
+            .OrderByDescending(o => o.Date)
             .Skip(request.PageSize * (request.PageIndex - 1))
             .Take(request.PageSize)
+            .Select(o => _mapper.Map<OrderDto>(o))
             .ToList();
-
-        foreach (var order in orderList)
+        
+        return new GetOrderHistoryResponse(orderDtoList);
+    }
+    
+    private async Task<IEnumerable<Order>> ApplyRoleFilter(IEnumerable<Order> orders, int? requestUserId, int userId, 
+        string userRole)
+    {
+        // apply a filter if the user is not an admin
+        if (userRole != Role.Admin.ToString())
         {
-            // Explicitly load courses for each order
-            var query = await _courseRepository.GetCoursesByOrderId(order.Id);
-            order.Courses = query.ToList();
+            return orders.Where(o => o.UserId == userId);
+        }
+        if (requestUserId == null)
+        {
+            return orders;
+        }
+        // apply a filter if the user is an admin and the request contains a UserId 
+        var requestedUser = await _userRepository.GetById(requestUserId.Value);
+        if (requestedUser == null)
+        {
+            throw new ArgumentException("User not found");
         }
 
-        return orderList.Select(o => _mapper.Map<OrderDto>(o)).ToList();
+        return orders.Where(o => o.UserId == requestUserId);
     }
 }

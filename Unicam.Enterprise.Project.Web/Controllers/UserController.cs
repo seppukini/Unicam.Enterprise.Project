@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Unicam.Enterprise.Project.Application.Models.Requests;
-using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
@@ -20,9 +19,9 @@ public class UserController : ControllerBase
     [Route("create")]
     public async Task<IActionResult> CreateUser(CreateUserRequest request)
     {
-        var user = await _userService.CreateUser(request);
+        var response = await _userService.CreateUser(request);
         
-        return Ok(new CreateUserResponse(user));
+        return Ok(response);
     }
     
     [HttpPost]
@@ -31,9 +30,9 @@ public class UserController : ControllerBase
     {
         try
         {
-            var token = await _userService.Login(request);
+            var response = await _userService.Login(request);
             
-            return Ok(new LoginResponse(token));
+            return Ok(response);
         }
         catch (Exception e)
         {

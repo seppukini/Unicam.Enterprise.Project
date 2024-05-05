@@ -6,7 +6,7 @@ public class OrderDto
 {
     public int Id { get; init; }
     public DateTime Date { get; init; }
-    public Address DeliveryAddress { get; init; } = new();
-    public List<CourseDto> Courses { get; init; } = new();
+    public Address DeliveryAddress { get; init; } = new ();
+    public IEnumerable<CourseDto> Courses { get; init; } = new List<CourseDto>();
     public int UserId { get; init; }
 }

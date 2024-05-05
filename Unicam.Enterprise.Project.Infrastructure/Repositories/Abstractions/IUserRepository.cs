@@ -1,7 +1,6 @@
-using Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 using Unicam.Enterprise.Project.Model.Entities;
 
-namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
+namespace Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 
 public interface IUserRepository : IRepositoryBase<User>
 {

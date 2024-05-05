@@ -2,9 +2,9 @@
 
 public class GetOrderHistoryRequest
 {
-    public DateTime StartDate { get; set; }
-    public DateTime EndDate { get; set; }
-    public int? UserId { get; set; }
-    public int PageIndex { get; set; }
-    public int PageSize { get; set; }
+    public DateTime StartDate { get; set; } = DateTime.MinValue;
+    public DateTime EndDate { get; set; } = DateTime.MaxValue;
+    public int? UserId { get; set; } = null;
+    public int PageIndex { get; set; } = 1;
+    public int PageSize { get; set; } = 10;
 } 

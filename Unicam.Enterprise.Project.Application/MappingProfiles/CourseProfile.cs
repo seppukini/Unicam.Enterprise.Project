@@ -8,6 +8,8 @@ public class CourseProfile : Profile
 {
     public CourseProfile()
     {
-        CreateMap<Course, CourseDto>();
+        CreateMap<Course, CourseDto>()
+            .ForMember(dest => dest.Price, opt
+                => opt.MapFrom(src => src.Price.ToString("F2")));
     }
 }

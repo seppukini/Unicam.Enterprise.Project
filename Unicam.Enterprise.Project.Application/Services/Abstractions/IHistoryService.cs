@@ -1,11 +1,9 @@
-using Unicam.Enterprise.Project.Application.Models.DTOs;
 using Unicam.Enterprise.Project.Application.Models.Requests;
+using Unicam.Enterprise.Project.Application.Models.Responses;
 
 namespace Unicam.Enterprise.Project.Application.Services.Abstractions;
 
-using System.Collections.Generic;
-
 public interface IHistoryService
 {
-    Task<IEnumerable<OrderDto>> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole);
+    Task<GetOrderHistoryResponse> GetOrderHistory(GetOrderHistoryRequest request, int userId, string userRole);
 }

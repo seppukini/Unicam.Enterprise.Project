@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Unicam.Enterprise.Project.Application.Models.Requests;
-using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
@@ -28,10 +27,9 @@ public class HistoryController : ControllerBase
     {
         try
         {
-            var orderDtos = await _historyService.
-                GetOrderHistory(request, int.Parse(UserId), UserRole);
+            var response = await _historyService.GetOrderHistory(request, int.Parse(UserId), UserRole);
             
-            return Ok(new GetOrderHistoryResponse(orderDtos));
+            return Ok(response);
         }
         catch (Exception e)
         {

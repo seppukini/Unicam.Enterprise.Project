@@ -7,27 +7,28 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Unicam.Enterprise.Project.Application.Models.DTOs;
 using Unicam.Enterprise.Project.Application.Models.Requests;
+using Unicam.Enterprise.Project.Application.Models.Responses;
 using Unicam.Enterprise.Project.Application.Options;
 using Unicam.Enterprise.Project.Application.Services.Abstractions;
-using Unicam.Enterprise.Project.Infrastructure.Repositories;
+using Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.Services;
 
 public class UserService : IUserService
 {
-    private readonly UserRepository _userRepository;
+    private readonly IUserRepository _userRepository;
     private readonly JwtSettingsOption _jwtSettingsOption;
     private readonly IMapper _mapper;
     
-    public UserService(UserRepository userRepository, IOptions<JwtSettingsOption> jwtSettingsOption, IMapper mapper)
+    public UserService(IUserRepository userRepository, IOptions<JwtSettingsOption> jwtSettingsOption, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
         _jwtSettingsOption = jwtSettingsOption.Value;
     }
     
-    public async Task<UserDto> CreateUser(CreateUserRequest request)
+    public async Task<CreateUserResponse> CreateUser(CreateUserRequest request)
     {
         var user = _mapper.Map<User>(request);
         user.Role = Role.Customer;
@@ -35,10 +36,12 @@ public class UserService : IUserService
         await _userRepository.Insert(user);
         await _userRepository.Save();
         
-        return _mapper.Map<UserDto>(user);
+        var orderDto = _mapper.Map<UserDto>(user);
+        
+        return new CreateUserResponse(orderDto);
     }
     
-    public async Task<string> Login(LoginRequest request)
+    public async Task<LoginResponse> Login(LoginRequest request)
     {
         var user = await _userRepository.GetUserByEmail(request.Email);
         
@@ -47,7 +50,9 @@ public class UserService : IUserService
             throw new AuthenticationException("User not found.");
         }
         
-        return GenerateJwtToken(CreateClaims(user));
+        var token = GenerateJwtToken(CreateClaims(user));
+        
+        return new LoginResponse(token);
     }
     
     private static IEnumerable<Claim> CreateClaims(User user)
@@ -55,9 +60,9 @@ public class UserService : IUserService
         return new List<Claim>
         {
             new(ClaimTypes.NameIdentifier, user.Id.ToString()),
-            new(ClaimTypes.Name, user.Name ?? throw new Exception("no name found")),
-            new(ClaimTypes.Surname, user.Surname ?? throw new Exception("no surname found")),
-            new(ClaimTypes.Email, user.Email ?? throw new Exception("no email found")),
+            new(ClaimTypes.Name, user.Name),
+            new(ClaimTypes.Surname, user.Surname),
+            new(ClaimTypes.Email, user.Email),
             new(ClaimTypes.Role, user.Role.ToString())
         };
     }

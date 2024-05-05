@@ -12,6 +12,7 @@ public class OrderRepository : RepositoryBase<Order>, IOrderRepository
     public async Task<IEnumerable<Order>> GetOrdersBetweenDatesAsync(DateTime startDate, DateTime endDate)
     {
         return await DbSet
+            .Include(o => o.Courses)
             .Where(order => order.Date >= startDate && order.Date <= endDate)
             .ToListAsync();
     }
