@@ -5,5 +5,4 @@ namespace Unicam.Enterprise.Project.Infrastructure.Repositories.Abstractions;
 public interface IUserRepository : IRepositoryBase<User>
 {
     Task<User?> GetUserByEmail(string email);
-    Task<User?> FindById(int id);
 }
