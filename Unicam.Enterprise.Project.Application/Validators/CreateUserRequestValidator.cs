@@ -11,6 +11,7 @@ public class CreateUserRequestValidator : AbstractValidator<CreateUserRequest>
             .NotEmpty().WithMessage("Email is required")
             .EmailAddress().WithMessage("Email is not valid");
         
+        // Password Standards
         RuleFor(e => e.Password)
             .NotEmpty().WithMessage("Password is required")
             .MinimumLength(6).WithMessage("Password must be at least 6 characters long")
