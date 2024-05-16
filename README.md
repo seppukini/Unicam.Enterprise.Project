@@ -5,7 +5,7 @@ This API facilitates restaurant ordering processes, allowing for the management 
 
 ## Technologies
 - .NET Core
-- Docker for database hosting
+- Docker for database and api deployment
 - OpenAPI specification for API documentation and testing
 
 ## Features
@@ -41,10 +41,12 @@ This API facilitates restaurant ordering processes, allowing for the management 
   - Support for pagination in results.
 
 ## Setup
-1. **Database**: The application uses a Dockerized database which can be set up and run with Docker commands provided in the docker-compose file.
-2. **Running the API**: Use commands to build and run the API, which is detailed in the accompanying Dockerfile and make use of the OpenAPI specification for easy endpoint testing and interaction.
+**Application + Database**: The application uses a Dockerized database which can be set up and run with Docker by running ``docker-compose up --build``.
 
 ## How to Use
-- **Documentation and Interaction**: Access the OpenAPI documentation by navigating to `/swagger` on the hosted API domain to test endpoints and view schema definitions.
+- **Documentation and Interaction**: Access the OpenAPI documentation by navigating to `localhost:8080/swagger` on the hosted API domain to test endpoints and view schema definitions.
 
 This API provides a robust backend for restaurant order management, supporting advanced features like auto-incremented order tracking, role-based access control, and discount application logic for comprehensive meal orders.
+
+## Easy Setup
+If on a *NIX machine with bash, just run ``./start.sh`` with docker installed and running.
