@@ -6,22 +6,32 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8080:80"
+    depends_on:
+      - db
+      - db-init
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
-      - ConnectionStrings__MyDbContext=Server=db;Database=ParadigmiProject;User=paradigmi;Password=paradigmi;TrustServerCertificate=True;
+      - ConnectionStrings__MyDbContext=Server=db;Database=ParadigmiProject;User Id=sa;Password=SuperSecretPassword1235!!!!;TrustServerCertificate=True;
 
   db:
-    image: mysql:latest
-    restart: always
+    image: mcr.microsoft.com/mssql/server:2022-latest
     environment:
-      MYSQL_DATABASE: ParadigmiProject
-      MYSQL_USER: paradigmi
-      MYSQL_PASSWORD: paradigmi
-      MYSQL_ROOT_PASSWORD: paradigmi
+      MSSQL_SA_PASSWORD: "SuperSecretPassword1235!!!!"
+      ACCEPT_EULA: "Y"
     ports:
-      - "3306:3306"
+      - "1433:1433"
     volumes:
-      - db-data:/var/lib/mysql
+      - sqlserver-data:/var/opt/mssql
+
+  
+  db-init:
+    build:
+      context: .
+      dockerfile: Dockerfile.init
+    depends_on:
+      - db
+    environment:
+      SA_PASSWORD: "SuperSecretPassword1235!!!!"
 
 volumes:
-  db-data:
+  sqlserver-data:

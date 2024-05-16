@@ -1,0 +1,15 @@
+# Dockerfile.init
+FROM mcr.microsoft.com/mssql-tools
+
+WORKDIR /init
+
+# Copy the initialization script
+COPY db-init-full.sql .
+COPY run-init.sh .
+
+# Ensure the script has executable permissions
+RUN chmod +x run-init.sh
+
+# Run the initialization script
+ENTRYPOINT ["./run-init.sh"]
+
