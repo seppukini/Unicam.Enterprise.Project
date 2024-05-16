@@ -1,0 +1,27 @@
+services:
+  web:
+    image: api-dotnet-6
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings__MyDbContext=Server=db;Database=ParadigmiProject;User=paradigmi;Password=paradigmi;TrustServerCertificate=True;
+
+  db:
+    image: mysql:latest
+    restart: always
+    environment:
+      MYSQL_DATABASE: ParadigmiProject
+      MYSQL_USER: paradigmi
+      MYSQL_PASSWORD: paradigmi
+      MYSQL_ROOT_PASSWORD: paradigmi
+    ports:
+      - "3306:3306"
+    volumes:
+      - db-data:/var/lib/mysql
+
+volumes:
+  db-data:
