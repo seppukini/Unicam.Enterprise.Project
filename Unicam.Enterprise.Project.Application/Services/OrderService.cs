@@ -33,23 +33,48 @@ public class OrderService : IOrderService
         order.UserId = userId;
         order.Courses.AddRange(courses);
 
-        var totalPrice = order.Courses.Sum(course => course.Price);
-        if (IsCompleteMeal(order.Courses))
-        {
-            totalPrice *= 0.9m; // 10% discount for complete meal
-        }
-
         await _orderRepository.Insert(order);
         await _orderRepository.Save();
+        
+        var totalPrice = CalculateTotalPrice(order.Courses);
 
         return new CreateOrderResponse(order.Id, totalPrice);
     }
-
-    private static bool IsCompleteMeal(IEnumerable<Course> courses)
+    
+    private static decimal CalculateTotalPrice(List<Course> courses)
     {
-        var courseTypes = courses.Select(c => c.Type).Distinct().ToList();
-        return courseTypes.Count == 4 && courseTypes.Contains(CourseType.Main) &&
-               courseTypes.Contains(CourseType.Second) && courseTypes.Contains(CourseType.Side) &&
-               courseTypes.Contains(CourseType.Dessert);
+        decimal totalPrice = 0;
+        var courseGroups = courses.GroupBy(c => c.Type).ToDictionary(g 
+            => g.Key, g => g.ToList());
+
+        // Apply 10% discount on complete meals
+        while (IsCompleteMeal(courseGroups))
+        {
+            var mealPrice = Enum.GetValues(typeof(CourseType)).Cast<CourseType>().Sum(type 
+                => GetAndRemoveMostExpensive(courseGroups, type));
+            totalPrice += mealPrice * 0.9m;
+        }
+        
+        // Add remaining courses at full price
+        totalPrice += courseGroups.Values.SelectMany(c => c).Sum(course => course.Price); 
+
+        return totalPrice;
+    }
+    
+    private static bool IsCompleteMeal(Dictionary<CourseType, List<Course>> courseGroups)
+    {
+        return Enum.GetValues(typeof(CourseType)).Cast<CourseType>().All(type => courseGroups.ContainsKey(type) && 
+            courseGroups[type].Any());
+    }
+    
+    private static decimal GetAndRemoveMostExpensive(Dictionary<CourseType, List<Course>> courseGroups, CourseType type)
+    {
+        var mostExpensive = courseGroups[type].OrderByDescending(c => c.Price).First();
+        courseGroups[type].Remove(mostExpensive);
+        if (!courseGroups[type].Any())
+        {
+            courseGroups.Remove(type);
+        }
+        return mostExpensive.Price;
     }
 }

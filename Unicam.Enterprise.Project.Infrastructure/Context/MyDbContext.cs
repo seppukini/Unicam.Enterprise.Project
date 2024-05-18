@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore.Design;
 using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Context;
@@ -16,11 +15,8 @@ public class MyDbContext : DbContext
     public DbSet<User> Users { get; set; }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            base.OnModelCreating(modelBuilder);
-
-            // Configure Address as an owned type
-            modelBuilder.Entity<Order>()
-                .OwnsOne(o => o.DeliveryAddress);
-        }
+    {
+        modelBuilder.ApplyConfigurationsFromAssembly(GetType().Assembly);
+        base.OnModelCreating(modelBuilder);
+    }
 }
