@@ -28,6 +28,8 @@ public class HistoryService : IHistoryService
             request.EndDate);
         orders = await ApplyRoleFilter(orders, request.UserId, userId, userRole);
         
+        var totalPagesFound = (orders.Count() + request.PageSize - 1) / request.PageSize;
+        
         var orderDtoList = orders
             .OrderByDescending(o => o.Date)
             .Skip(request.PageSize * (request.PageIndex - 1))
@@ -35,20 +37,20 @@ public class HistoryService : IHistoryService
             .Select(o => _mapper.Map<OrderDto>(o))
             .ToList();
         
-        return new GetOrderHistoryResponse(orderDtoList);
+        return new GetOrderHistoryResponse(orderDtoList, totalPagesFound);
     }
     
-    private async Task<IEnumerable<Order>> ApplyRoleFilter(IEnumerable<Order> orders, int? requestUserId, int userId, 
+    private async Task<List<Order>> ApplyRoleFilter(IEnumerable<Order> orders, int? requestUserId, int userId, 
         string userRole)
     {
         // apply a filter if the user is not an admin
         if (userRole != Role.Admin.ToString())
         {
-            return orders.Where(o => o.UserId == userId);
+            return orders.Where(o => o.UserId == userId).ToList();
         }
-        if (requestUserId == null)
+        if (!requestUserId.HasValue)
         {
-            return orders;
+            return orders.ToList();
         }
         // apply a filter if the user is an admin and the request contains a UserId 
         var requestedUser = await _userRepository.GetById(requestUserId.Value);
@@ -56,7 +58,6 @@ public class HistoryService : IHistoryService
         {
             throw new ArgumentException("User not found");
         }
-
-        return orders.Where(o => o.UserId == requestUserId);
+        return orders.Where(o => o.UserId == requestUserId.Value).ToList();
     }
 }

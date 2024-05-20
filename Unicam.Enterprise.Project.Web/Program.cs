@@ -1,7 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Unicam.Enterprise.Project.Application.Extensions;
 using Unicam.Enterprise.Project.Extensions;
-using Unicam.Enterprise.Project.Infrastructure.Context;
 using Unicam.Enterprise.Project.Infrastructure.Extension;
 
 var builder = WebApplication.CreateBuilder(args);
