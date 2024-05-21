@@ -8,12 +8,21 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.Services;
 
+/// <summary>
+/// Service for managing order history.
+/// </summary>
 public class HistoryService : IHistoryService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly IUserRepository _userRepository;
     private readonly IMapper _mapper;
 
+    /// <summary>
+    /// Constructor to initialize the service with order and user repositories, and AutoMapper instances.
+    /// </summary>
+    /// <param name="orderRepository">The order repository instance.</param>
+    /// <param name="userRepository">The user repository instance.</param>
+    /// <param name="mapper">The AutoMapper instance.</param>
     public HistoryService(IOrderRepository orderRepository, IUserRepository userRepository, IMapper mapper)
     {
         _orderRepository = orderRepository;
@@ -21,6 +30,13 @@ public class HistoryService : IHistoryService
         _mapper = mapper;
     }
 
+    /// <summary>
+    /// Retrieves the order history for a user.
+    /// </summary>
+    /// <param name="request">The get order history request.</param>
+    /// <param name="userId">The user ID.</param>
+    /// <param name="userRole">The user role.</param>
+    /// <returns>The get order history response.</returns>
     public async Task<GetOrderHistoryResponse> GetOrderHistory(GetOrderHistoryRequest request, int userId, 
         string userRole)
     {

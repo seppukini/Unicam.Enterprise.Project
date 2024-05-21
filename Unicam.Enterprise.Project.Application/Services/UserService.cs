@@ -15,19 +15,33 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.Services;
 
+/// <summary>
+/// Service for managing users.
+/// </summary>
 public class UserService : IUserService
 {
     private readonly IUserRepository _userRepository;
     private readonly JwtSettingsOption _jwtSettingsOption;
     private readonly IMapper _mapper;
-    
+
+    /// <summary>
+    /// Constructor to initialize the service with a user repository, JWT settings option, and AutoMapper instances.
+    /// </summary>
+    /// <param name="userRepository">The user repository instance.</param>
+    /// <param name="jwtSettingsOption">The JWT settings option instance.</param>
+    /// <param name="mapper">The AutoMapper instance.</param>
     public UserService(IUserRepository userRepository, IOptions<JwtSettingsOption> jwtSettingsOption, IMapper mapper)
     {
         _userRepository = userRepository;
         _mapper = mapper;
         _jwtSettingsOption = jwtSettingsOption.Value;
     }
-    
+
+    /// <summary>
+    /// Creates a new user.
+    /// </summary>
+    /// <param name="request">The create user request.</param>
+    /// <returns>The created user response.</returns>
     public async Task<CreateUserResponse> CreateUser(CreateUserRequest request)
     {
         var user = _mapper.Map<User>(request);
@@ -40,7 +54,12 @@ public class UserService : IUserService
         
         return new CreateUserResponse(orderDto);
     }
-    
+
+    /// <summary>
+    /// Logs in a user.
+    /// </summary>
+    /// <param name="request">The login request.</param>
+    /// <returns>The login response.</returns>
     public async Task<LoginResponse> Login(LoginRequest request)
     {
         var user = await _userRepository.GetUserByEmail(request.Email);

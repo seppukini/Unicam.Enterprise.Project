@@ -7,19 +7,34 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.Services;
 
+/// <summary>
+/// Service for managing orders.
+/// </summary>
 public class OrderService : IOrderService
 {
     private readonly IOrderRepository _orderRepository;
     private readonly ICourseRepository _courseRepository;
     private readonly IMapper _mapper;
-    
+
+    /// <summary>
+    /// Constructor to initialize the service with order and course repositories, and AutoMapper instances.
+    /// </summary>
+    /// <param name="orderRepository">The order repository instance.</param>
+    /// <param name="courseRepository">The course repository instance.</param>
+    /// <param name="mapper">The AutoMapper instance.</param>
     public OrderService(IOrderRepository orderRepository, ICourseRepository courseRepository, IMapper mapper)
     {
         _orderRepository = orderRepository;
         _courseRepository = courseRepository;
         _mapper = mapper;
     }
-    
+
+    /// <summary>
+    /// Creates a new order.
+    /// </summary>
+    /// <param name="request">The create order request.</param>
+    /// <param name="userId">The user ID.</param>
+    /// <returns>The create order response.</returns>
     public async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest request, int userId)
     {
         var courses = await _courseRepository.FindByIds(request.CourseIds);
