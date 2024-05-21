@@ -8,8 +8,16 @@ using Unicam.Enterprise.Project.Application.Options;
 
 namespace Unicam.Enterprise.Project.Extensions;
 
+/// <summary>
+/// Extensions for the service collection.
+/// </summary>
 public static class ServiceExtension
 {
+    /// <summary>
+    /// Adds the web services to the service collection.
+    /// </summary>
+    /// <param name="services">The service collection.</param>
+    /// <param name="configuration">The configuration.</param>
     public static void AddWebServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddControllers();

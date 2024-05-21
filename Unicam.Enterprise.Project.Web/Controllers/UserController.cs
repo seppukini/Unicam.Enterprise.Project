@@ -4,17 +4,29 @@ using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
 
+/// <summary>
+/// Controller for handling user-related operations.
+/// </summary>
 [Route("api/v1/[controller]")]
 [ApiController]
 public class UserController : ControllerBase
 {
     private readonly IUserService _userService;
-    
+
+    /// <summary>
+    /// Constructor for the user controller.
+    /// </summary>
+    /// <param name="userService">The user service.</param>
     public UserController(IUserService userService)
     {
         _userService = userService;
     }
-    
+
+    /// <summary>
+    /// Creates a new user.
+    /// </summary>
+    /// <param name="request">The create user request.</param>
+    /// <returns>A response indicating the result of the operation.</returns>
     [HttpPost]
     [Route("create")]
     public async Task<IActionResult> CreateUser(CreateUserRequest request)
@@ -23,7 +35,12 @@ public class UserController : ControllerBase
         
         return Ok(response);
     }
-    
+
+    /// <summary>
+    /// Logs in a user.
+    /// </summary>
+    /// <param name="request">The login request.</param>
+    /// <returns>A response indicating the result of the operation.</returns>
     [HttpPost]
     [Route("login")]
     public async Task<IActionResult> Login(LoginRequest request)

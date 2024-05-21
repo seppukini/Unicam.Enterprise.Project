@@ -7,8 +7,14 @@ using Unicam.Enterprise.Project.Application.Services.Abstractions;
 
 namespace Unicam.Enterprise.Project.Controllers;
 
+/// <summary>
+/// Controller for handling order-related operations.
+/// </summary>
 [Route("api/v1/[controller]")]
 [ApiController]
+/// <summary>
+/// Requires authentication using the JWT Bearer scheme.
+/// </summary>
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class OrderController : ControllerBase
 {
@@ -19,7 +25,12 @@ public class OrderController : ControllerBase
     {
         _orderService = orderService;
     }
-    
+
+    /// <summary>
+    /// Creates a new order.
+    /// </summary>
+    /// <param name="request">The create order request.</param>
+    /// <returns>A response indicating the result of the operation.</returns>
     [HttpPost]
     [Route("create")]
     public async Task<IActionResult> CreateOrder(CreateOrderRequest request)
