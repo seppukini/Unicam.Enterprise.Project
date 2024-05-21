@@ -1,6 +1,9 @@
 
 namespace Unicam.Enterprise.Project.Application.Models.DTOs;
 
+/// <summary>
+/// Data transfer object for a user.
+/// </summary>
 public class UserDto
 {
     public int Id { get; init; }

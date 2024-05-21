@@ -15,13 +15,7 @@ public class OrderRepository : RepositoryBase<Order>, IOrderRepository
     /// </summary>
     /// <param name="context">The DbContext instance.</param>
     public OrderRepository(MyDbContext context) : base(context) { }
-
-    /// <summary>
-    /// Retrieves orders between the specified dates.
-    /// </summary>
-    /// <param name="startDate">The start date.</param>
-    /// <param name="endDate">The end date.</param>
-    /// <returns>A list of orders between the specified dates.</returns>
+    
     public async Task<IEnumerable<Order>> GetOrdersBetweenDatesAsync(DateTime startDate, DateTime endDate)
     {
         // Use the DbSet to retrieve orders between the specified dates

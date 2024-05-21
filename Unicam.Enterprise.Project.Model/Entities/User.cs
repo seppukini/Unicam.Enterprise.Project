@@ -1,7 +1,9 @@
 
 namespace Unicam.Enterprise.Project.Model.Entities;
 
-// Customer class
+/// <summary>
+/// Represents a user of the system.
+/// </summary>
 public class User
 {
     public int Id { get; init; }
@@ -11,6 +13,6 @@ public class User
     public string Password { get; set; } = string.Empty;
     public Role Role { get; set; }
 
-    // Dishes taken for each customer
+    // Dishes taken for each user
     public IEnumerable<Order> Orders { get; set; } = new List<Order>();
 }

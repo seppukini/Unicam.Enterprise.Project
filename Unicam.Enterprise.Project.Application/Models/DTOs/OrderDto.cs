@@ -2,6 +2,9 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.Models.DTOs;
 
+/// <summary>
+/// Data transfer object for an order.
+/// </summary>
 public class OrderDto
 {
     public int Id { get; init; }

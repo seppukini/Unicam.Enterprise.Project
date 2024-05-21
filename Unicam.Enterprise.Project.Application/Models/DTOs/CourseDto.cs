@@ -1,6 +1,9 @@
 
 namespace Unicam.Enterprise.Project.Application.Models.DTOs;
 
+/// <summary>
+/// Data transfer object for a course.
+/// </summary>
 public class CourseDto
 {
     public int Id { get; init; }

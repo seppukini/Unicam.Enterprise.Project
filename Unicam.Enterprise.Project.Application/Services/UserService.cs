@@ -36,12 +36,7 @@ public class UserService : IUserService
         _mapper = mapper;
         _jwtSettingsOption = jwtSettingsOption.Value;
     }
-
-    /// <summary>
-    /// Creates a new user.
-    /// </summary>
-    /// <param name="request">The create user request.</param>
-    /// <returns>The created user response.</returns>
+    
     public async Task<CreateUserResponse> CreateUser(CreateUserRequest request)
     {
         var user = _mapper.Map<User>(request);
@@ -54,12 +49,7 @@ public class UserService : IUserService
         
         return new CreateUserResponse(orderDto);
     }
-
-    /// <summary>
-    /// Logs in a user.
-    /// </summary>
-    /// <param name="request">The login request.</param>
-    /// <returns>The login response.</returns>
+    
     public async Task<LoginResponse> Login(LoginRequest request)
     {
         var user = await _userRepository.GetUserByEmail(request.Email);

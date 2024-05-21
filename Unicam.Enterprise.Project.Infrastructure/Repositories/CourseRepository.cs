@@ -15,12 +15,7 @@ public class CourseRepository : RepositoryBase<Course>, ICourseRepository
     /// </summary>
     /// <param name="context">The DbContext instance.</param>
     public CourseRepository(MyDbContext context) : base(context) { }
-
-    /// <summary>
-    /// Retrieves courses by their IDs.
-    /// </summary>
-    /// <param name="ids">The IDs of the courses to retrieve.</param>
-    /// <returns>A list of courses with the specified IDs.</returns>
+    
     public async Task<List<Course>> FindByIds(IEnumerable<int> ids)
     {
         // Use the DbSet to retrieve courses by their IDs

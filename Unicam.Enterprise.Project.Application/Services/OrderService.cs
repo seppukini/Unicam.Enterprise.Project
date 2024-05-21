@@ -28,13 +28,7 @@ public class OrderService : IOrderService
         _courseRepository = courseRepository;
         _mapper = mapper;
     }
-
-    /// <summary>
-    /// Creates a new order.
-    /// </summary>
-    /// <param name="request">The create order request.</param>
-    /// <param name="userId">The user ID.</param>
-    /// <returns>The create order response.</returns>
+    
     public async Task<CreateOrderResponse> CreateOrder(CreateOrderRequest request, int userId)
     {
         var courses = await _courseRepository.FindByIds(request.CourseIds);

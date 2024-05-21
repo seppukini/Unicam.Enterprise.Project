@@ -5,6 +5,9 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Application.MappingProfiles;
 
+/// <summary>
+/// Mapping profile for the User entity.
+/// </summary>
 public class UserProfile : Profile
 {
     public UserProfile()

@@ -1,6 +1,9 @@
 
 namespace Unicam.Enterprise.Project.Model.Entities;
 
+/// <summary>
+/// Represents a course that can be ordered by a user.
+/// </summary>
 public class Course
 {
     public int Id { get; set; }

@@ -9,12 +9,10 @@ namespace Unicam.Enterprise.Project.Controllers;
 
 /// <summary>
 /// Controller for handling order-related operations.
+/// For use the API of this controller, the user must be authenticated.
 /// </summary>
 [Route("api/v1/[controller]")]
 [ApiController]
-/// <summary>
-/// Requires authentication using the JWT Bearer scheme.
-/// </summary>
 [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
 public class OrderController : ControllerBase
 {
