@@ -5,12 +5,25 @@ using Unicam.Enterprise.Project.Model.Entities;
 
 namespace Unicam.Enterprise.Project.Infrastructure.Repositories;
 
+/// <summary>
+/// Repository for managing courses.
+/// </summary>
 public class CourseRepository : RepositoryBase<Course>, ICourseRepository
 {
+    /// <summary>
+    /// Constructor to initialize the repository with a DbContext instance.
+    /// </summary>
+    /// <param name="context">The DbContext instance.</param>
     public CourseRepository(MyDbContext context) : base(context) { }
 
+    /// <summary>
+    /// Retrieves courses by their IDs.
+    /// </summary>
+    /// <param name="ids">The IDs of the courses to retrieve.</param>
+    /// <returns>A list of courses with the specified IDs.</returns>
     public async Task<List<Course>> FindByIds(IEnumerable<int> ids)
     {
+        // Use the DbSet to retrieve courses by their IDs
         return await DbSet.Where(c => ids.Contains(c.Id)).ToListAsync();
     }
 }
